@@ -1,0 +1,35 @@
+<!doctype html>
+<meta charset="utf-8" />
+<title>Force Motion check</title>
+<style>
+  body {
+    font: 20px/1.4 system-ui;
+    padding: 2rem;
+  }
+  .ok {
+    color: #16a34a;
+  }
+  .bad {
+    color: #dc2626;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .css::after {
+      content: " CSS says REDUCE";
+      color: #dc2626;
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .css::after {
+      content: " CSS says MOTION OK";
+      color: #16a34a;
+    }
+  }
+</style>
+<p class="js"></p>
+<p class="css">Media query:</p>
+<script>
+  const r = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.querySelector(".js").innerHTML = r
+    ? '<span class="bad">JS says REDUCE</span>'
+    : '<span class="ok">JS says MOTION OK</span>';
+</script>
